@@ -1,3 +1,5 @@
-nama;nisn;asal_sekolah;jurusan;gelombang;alamat;telepon
-Andi;1234567890;SMPN 1;TKJ;Gelombang 1;Jl. Merdeka 10;081234567890
-Budi;1234567891;SMPN 2;RPL;Gelombang 1;Jl. Sudirman 12;081234567891
+nama,nisn,asal_sekolah,jurusan,gelombang,alamat,telepon
+Andi,1234567890,SMPN 1,TKJ,Gelombang 1,Jl. Merdeka 10,081234567890
+Budi,1234567891,SMPN 2,RPL,Gelombang 1,Jl. Sudirman 12,081234567891
+
+
