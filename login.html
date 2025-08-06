@@ -144,19 +144,25 @@
       }
 
       try {
-        const res = await fetch('http://localhost:3000/login', {
+        // Ganti URL API di bawah sesuai domain hosting kamu
+        const res = await fetch('https://api.situsanda.com/login', { // <-- Ganti ini
           method: 'POST',
-          headers:{ 'Content-Type':'application/json' },
+          headers: { 'Content-Type':'application/json' },
           body: JSON.stringify({ username, password })
         });
         const json = await res.json();
+
         if (res.ok) {
+          // Simpan username (atau token) di localStorage
           localStorage.setItem('loginUser', username);
+          // Pindah ke halaman utama
           window.location.href = 'main.html';
         } else {
+          // Tampilkan pesan error dari server
           err.textContent = json.error || 'Login gagal!';
         }
       } catch(e) {
+        // Jika gagal koneksi ke server
         err.textContent = 'Tidak dapat terhubung ke server.';
       }
     }
