@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Formulir Pendaftaran</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 32px;
+    background: #f0f4fa;
+    color: #1a2e4b;
+  }
+  label, select, input, button {
+    display: block;
+    width: 100%;
+    margin-bottom: 16px;
+    font-size: 1rem;
+  }
+  input, select {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1.8px solid #aacbeb;
+  }
+  button {
+    background-color: #3a73d4;
+    color: white;
+    border: none;
+    padding: 12px 0;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #2a52a1;
+  }
+</style>
+</head>
+<body>
+
+<h2>Formulir Pendaftaran</h2>
+
+<label for="gelombang">Gelombang Pendaftaran</label>
+<select id="gelombang" required>
+  <option value="">Pilih Gelombang</option>
+  <option value="Gelombang 1">Gelombang 1</option>
+  <option value="Gelombang 2">Gelombang 2</option>
+</select>
+
+<label for="nama">Nama Lengkap</label>
+<input type="text" id="nama" required autocomplete="off" />
+
+<label for="nik">NIK</label>
+<input type="text" id="nik" required autocomplete="off" />
+
+<label for="ttl">Tempat & Tanggal Lahir</label>
+<input type="text" id="ttl" required autocomplete="off" />
+
+<label for="jk">Jenis Kelamin</label>
+<select id="jk" required>
+  <option value="">Pilih Jenis Kelamin</option>
+  <option value="Laki-laki">Laki-laki</option>
+  <option value="Perempuan">Perempuan</option>
+</select>
+
+<label for="alamat">Alamat Lengkap</label>
+<input type="text" id="alamat" required autocomplete="off" />
+
+<label for="nohp">No HP Siswa</label>
+<input type="text" id="nohp" required autocomplete="off" />
+
+<label for="email">Email Siswa</label>
+<input type="email" id="email" required autocomplete="off" />
+
+<hr />
+
+<label for="ayahibu">Nama Ayah & Ibu</label>
+<input type="text" id="ayahibu" required autocomplete="off" />
+
+<label for="alamatortu">Alamat Orangtua</label>
+<input type="text" id="alamatortu" required autocomplete="off" />
+
+<label for="pekerjaan">Pekerjaan Orangtua</label>
+<input type="text" id="pekerjaan" required autocomplete="off" />
+
+<label for="penghasilan">Penghasilan Bulanan</label>
+<input type="text" id="penghasilan" required autocomplete="off" />
+
+<label for="nohp_ortu">No HP Orangtua</label>
+<input type="text" id="nohp_ortu" required autocomplete="off" />
+
+<hr />
+
+<label for="ijazah">Data Ijazah</label>
+<input type="text" id="ijazah" required autocomplete="off" />
+
+<label for="nisn">Data NISN</label>
+<input type="text" id="nisn" required autocomplete="off" />
+
+<hr />
+
+<label for="jurusan">Pilihan Jurusan</label>
+<select id="jurusan" required>
+  <option value="">Pilih Jurusan</option>
+  <option value="IPA">IPA</option>
+  <option value="IPS">IPS</option>
+</select>
+
+<button onclick="lanjutForm()">Lanjut</button>
+<button onclick="window.location.href='info.html'" style="margin-top: 10px;">Kembali</button>
+
+<script>
+function lanjutForm() {
+  const gelombang = document.getElementById('gelombang').value.trim();
+  const nama = document.getElementById('nama').value.trim();
+  const nik = document.getElementById('nik').value.trim();
+  const ttl = document.getElementById('ttl').value.trim();
+  const jk = document.getElementById('jk').value.trim();
+  const alamat = document.getElementById('alamat').value.trim();
+  const nohp = document.getElementById('nohp').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const ayahibu = document.getElementById('ayahibu').value.trim();
+  const alamatortu = document.getElementById('alamatortu').value.trim();
+  const pekerjaan = document.getElementById('pekerjaan').value.trim();
+  const penghasilan = document.getElementById('penghasilan').value.trim();
+  const nohp_ortu = document.getElementById('nohp_ortu').value.trim();
+  const ijazah = document.getElementById('ijazah').value.trim();
+  const nisn = document.getElementById('nisn').value.trim();
+  const jurusan = document.getElementById('jurusan').value.trim();
+
+  if (!gelombang || !nama || !nik || !ttl || !jk || !alamat || !nohp ||
+      !email || !ayahibu || !alamatortu || !pekerjaan || !penghasilan ||
+      !nohp_ortu || !ijazah || !nisn || !jurusan) {
+    alert('Semua data harus diisi!');
+    return;
+  }
+
+  const formData = {
+    gelombang, nama, nik, ttl, jk, alamat, nohp, email,
+    ayahibu, alamatortu, pekerjaan, penghasilan,
+    nohp_ortu, ijazah, nisn, jurusan
+  };
+
+  sessionStorage.setItem('pendaftaranData', JSON.stringify(formData));
+  window.location.href = 'confirm.html';
+}
+</script>
+
+</body>
+</html>

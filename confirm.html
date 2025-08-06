@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Konfirmasi Data</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    padding: 32px;
+    background: #f0f4fa;
+    color: #1a2e4b;
+  }
+  ul {
+    font-size: 1rem;
+    margin-bottom: 24px;
+  }
+  li {
+    margin-bottom: 8px;
+  }
+  b {
+    color: #3a73d4;
+  }
+  button {
+    width: 100%;
+    padding: 12px 0;
+    font-weight: 700;
+    border-radius: 8px;
+    font-size: 1rem;
+    border: none;
+    background-color: #3a73d4;
+    color: white;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color: #2a52a1;
+  }
+</style>
+</head>
+<body>
+
+<h2>Konfirmasi Data Pendaftaran</h2>
+
+<ul id="dataList"></ul>
+
+<button onclick="verifikasi()">Verifikasi</button>
+<button onclick="window.location.href='form.html'" style="margin-top: 10px; background: #ccc; color: #333;">Kembali</button>
+
+<script>
+  const data = JSON.parse(sessionStorage.getItem('pendaftaranData'));
+  if (!data) {
+    alert('Data tidak ditemukan, kembali ke form.');
+    window.location.href = 'form.html';
+  }
+
+  const ul = document.getElementById('dataList');
+  ul.innerHTML = '';
+  for (const [key, value] of Object.entries(data)) {
+    const label = key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ');
+    const li = document.createElement('li');
+    li.innerHTML = `<b>${label}:</b> ${value}`;
+    ul.appendChild(li);
+  }
+
+  function verifikasi() {
+    fetch('http://localhost:3000/simpan', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(resp => {
+      alert(resp.message || 'Data berhasil tersimpan.');
+      sessionStorage.removeItem('pendaftaranData');
+      window.location.href = 'result.html';
+    })
+    .catch(err => {
+      alert('Gagal menyimpan data ke server.');
+      console.error(err);
+    });
+  }
+</script>
+
+</body>
+</html>
