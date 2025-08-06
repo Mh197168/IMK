@@ -1,5 +1,33 @@
-nama,nisn,asal_sekolah,jurusan,gelombang,alamat,telepon
-Andi,1234567890,SMPN 1,TKJ,Gelombang 1,Jl. Merdeka 10,081234567890
-Budi,1234567891,SMPN 2,RPL,Gelombang 1,Jl. Sudirman 12,081234567891
-
-
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Nama</th>
+      <th>NISN</th>
+      <th>Asal Sekolah</th>
+      <th>Jurusan</th>
+      <th>Gelombang</th>
+      <th>Alamat</th>
+      <th>Telepon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Andi</td>
+      <td>1234567890</td>
+      <td>SMPN 1</td>
+      <td>TKJ</td>
+      <td>Gelombang 1</td>
+      <td>Jl. Merdeka 10</td>
+      <td>081234567890</td>
+    </tr>
+    <tr>
+      <td>Budi</td>
+      <td>1234567891</td>
+      <td>SMPN 2</td>
+      <td>RPL</td>
+      <td>Gelombang 1</td>
+      <td>Jl. Sudirman 12</td>
+      <td>081234567891</td>
+    </tr>
+  </tbody>
+</table>
