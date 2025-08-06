@@ -1,83 +1,119 @@
 <!DOCTYPE html>
 <html lang="id">
-<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Konfirmasi Data</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    padding: 32px;
-    background: #f0f4fa;
-    color: #1a2e4b;
-  }
-  ul {
-    font-size: 1rem;
-    margin-bottom: 24px;
-  }
-  li {
-    margin-bottom: 8px;
-  }
-  b {
-    color: #3a73d4;
-  }
-  button {
-    width: 100%;
-    padding: 12px 0;
-    font-weight: 700;
-    border-radius: 8px;
-    font-size: 1rem;
-    border: none;
-    background-color: #3a73d4;
-    color: white;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #2a52a1;
-  }
-</style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Konfirmasi Data</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom right, #e0f7e9, #c8e6c9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background-color: white;
+      padding: 40px 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+      max-width: 400px;
+      width: 100%;
+      animation: slideFade 0.6s ease-out;
+    }
+    @keyframes slideFade {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    h2 {
+      color: #388e3c;
+      margin-bottom: 16px;
+    }
+    ul {
+      font-size: 1rem;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    b {
+      color: #388e3c;
+    }
+    button {
+      width: 100%;
+      padding: 12px 0;
+      font-weight: 600;
+      border-radius: 10px;
+      font-size: 1rem;
+      border: none;
+      background-color: #388e3c;
+      color: white;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #2f7032;
+    }
+    .back-btn {
+      background: #ccc;
+      color: #333;
+      margin-bottom: 0;
+    }
+    .back-btn:hover {
+      background: #bbb;
+    }
+  </style>
 </head>
 <body>
-
-<h2>Konfirmasi Data Pendaftaran</h2>
-
-<ul id="dataList"></ul>
-
-<button onclick="verifikasi()">Verifikasi</button>
-<button onclick="window.location.href='form.html'" style="margin-top: 10px; background: #ccc; color: #333;">Kembali</button>
-
-<script>
-  const data = JSON.parse(sessionStorage.getItem('pendaftaranData'));
-  if (!data) {
-    alert('Data tidak ditemukan, kembali ke form.');
-    window.location.href = 'form.html';
-  }
-
-  const ul = document.getElementById('dataList');
-  ul.innerHTML = '';
-  for (const [key, value] of Object.entries(data)) {
-    const label = key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ');
-    const li = document.createElement('li');
-    li.innerHTML = `<b>${label}:</b> ${value}`;
-    ul.appendChild(li);
-  }
-
-  function verifikasi() {
-    fetch('http://localhost:3000/simpan', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(resp => {
-      alert(resp.message || 'Data berhasil tersimpan.');
-      sessionStorage.removeItem('pendaftaranData');
-      window.location.href = 'result.html';
-    })
-    .catch(err => {
-      alert('Gagal menyimpan data ke server.');
-      console.error(err);
-    });
-  }
-</script>
-
+  <div class="card">
+    <h2>Konfirmasi Data Pendaftaran</h2>
+    <ul id="dataList"></ul>
+    <button onclick="verifikasi()">Verifikasi</button>
+    <button class="back-btn" onclick="window.location.href='form.html'">Kembali</button>
+  </div>
+  <script>
+    const data = JSON.parse(sessionStorage.getItem('pendaftaranData'));
+    if (!data) {
+      alert('Data tidak ditemukan, kembali ke form.');
+      window.location.href = 'form.html';
+    }
+    const ul = document.getElementById('dataList');
+    ul.innerHTML = '';
+    for (const [key, value] of Object.entries(data)) {
+      const label = key.charAt(0).toUpperCase() + key.slice(1).replace(/_/g, ' ');
+      const li = document.createElement('li');
+      li.innerHTML = `<b>${label}:</b> ${value}`;
+      ul.appendChild(li);
+    }
+    function verifikasi() {
+      fetch('http://localhost:3000/simpan', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+      .then(resp => {
+        alert(resp.message || 'Data berhasil tersimpan.');
+        sessionStorage.removeItem('pendaftaranData');
+        window.location.href = 'result.html';
+      })
+      .catch(err => {
+        alert('Gagal menyimpan data ke server.');
+        console.error(err);
+      });
+    }
+  </script>
 </body>
 </html>
