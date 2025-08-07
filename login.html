@@ -1,171 +1,132 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Login - PPDB Online</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(120deg, #e3f0ff 0%, #f5f8fa 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      transition: background 0.4s;
-    }
-    .container {
-      background: #fff;
-      padding: 38px 32px 28px 32px;
-      border-radius: 18px;
-      box-shadow: 0 8px 32px rgba(30, 136, 229, 0.09);
-      width: 100%;
-      max-width: 340px;
-      text-align: center;
-      animation: fadein 0.7s;
-    }
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(32px);}
-      to   { opacity: 1; transform: translateY(0);}
-    }
-    h2 {
-      color: #1e88e5;
-      font-size: 1.4rem;
-      margin-bottom: 22px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    h2 .icon {
-      font-size: 1.4rem;
-      vertical-align: middle;
-    }
-    label {
-      text-align: left;
-      font-weight: 500;
-      margin-bottom: 7px;
-      color: #2874c9;
-      letter-spacing: 0.3px;
-      font-size: 1rem;
-    }
-    input {
-      padding: 12px;
-      font-size: 1rem;
-      border: 1px solid #e3eaf3;
-      border-radius: 8px;
-      margin-bottom: 18px;
-      background: #f5f8fa;
-      transition: border 0.2s;
-    }
-    input:focus {
-      border: 1.7px solid #1e88e5;
-      outline: none;
-      background: #e3f0ff;
-    }
-    button {
-      background: linear-gradient(90deg, #1e88e5 60%, #1565c0 100%);
-      color: white;
-      border: none;
-      padding: 13px 0;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 700;
-      font-size: 1.07rem;
-      margin-top: 6px;
-      box-shadow: 0 2px 12px rgba(30,136,229,0.07);
-      transition: background 0.22s, box-shadow 0.22s;
-    }
-    button:hover {
-      background: linear-gradient(90deg, #1565c0 60%, #1e88e5 100%);
-      box-shadow: 0 4px 18px rgba(30,136,229,0.14);
-    }
-    .switch {
-      margin-top: 18px;
-      font-size: 0.98rem;
-      color: #2874c9;
-    }
-    .switch a {
-      color: #1e88e5;
-      text-decoration: none;
-      font-weight: 700;
-      transition: color 0.18s;
-    }
-    .switch a:hover {
-      color: #1565c0;
-      text-decoration: underline;
-    }
-    .error {
-      color: #e53935;
-      margin-bottom: 10px;
-      font-size: 0.96rem;
-      text-align: center;
-      min-height: 22px;
-      transition: color 0.2s;
-    }
-    @media (max-width: 500px) {
-      .container {
-        padding: 18px 7px 16px 7px;
-        max-width: 98vw;
-      }
-      h2 {
-        font-size: 1.08rem;
-      }
-      input, button {
-        font-size: 1rem;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PPDB Online - Login</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .login-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    width: 350px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0277bd;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0288d1;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background-color: #0277bd;
+  }
+
+  #statusMessage {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h2><span class="icon">🔒</span> PPDB Online - Login</h2>
-    <div id="error" class="error"></div>
-    <label for="username">Username</label>
-    <input type="text" id="username" autocomplete="username" placeholder="Masukkan username" />
-    <label for="password">Password</label>
-    <input type="password" id="password" autocomplete="current-password" placeholder="Masukkan password" />
-    <button onclick="doLogin()">Login</button>
-    <div class="switch">Belum punya akun? <a href="registrasi.html">Registrasi</a></div>
-  </div>
-  <script>
-    async function doLogin() {
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value.trim();
-      const err = document.getElementById('error');
-      err.textContent = '';
 
-      if (!username || !password) {
-        err.textContent = 'Username dan password harus diisi!';
-        return;
-      }
+<div class="login-container">
+  <h2>Login PPDB Online</h2>
+  <form id="loginForm">
+    <label>Username:</label>
+    <input type="text" name="username" placeholder="Masukkan username" required />
 
-      try {
-        // Ganti URL API di bawah sesuai domain hosting kamu
-        const res = await fetch('https://api.situsanda.com/login', { // <-- Ganti ini
-          method: 'POST',
-          headers: { 'Content-Type':'application/json' },
-          body: JSON.stringify({ username, password })
-        });
-        const json = await res.json();
+    <label>Password:</label>
+    <input type="password" name="password" placeholder="Masukkan password" required />
 
-        if (res.ok) {
-          // Simpan username (atau token) di localStorage
-          localStorage.setItem('loginUser', username);
-          // Pindah ke halaman utama
-          window.location.href = 'main.html';
-        } else {
-          // Tampilkan pesan error dari server
-          err.textContent = json.error || 'Login gagal!';
-        }
-      } catch(e) {
-        // Jika gagal koneksi ke server
-        err.textContent = 'Tidak dapat terhubung ke server.';
-      }
+    <button type="submit">Login</button>
+    <div id="statusMessage"></div>
+  </form>
+</div>
+
+<script>
+const form = document.getElementById('loginForm');
+const statusMsg = document.getElementById('statusMessage');
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  // Tampilkan loading
+  statusMsg.style.color = 'black';
+  statusMsg.style.fontWeight = 'bold';
+  statusMsg.textContent = 'Menghubungi server...';
+
+  // Ambil data dari form
+  const data = {};
+  new FormData(form).forEach((value, key) => {
+    data[key] = value;
+  });
+
+  // URL API login (ganti sesuai server Anda)
+  const apiUrl = 'https://jsonplaceholder.typicode.com/posts'; // Dummy API untuk testing
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST', // Biasanya POST untuk login
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      // Untuk testing, tampilkan response
+      statusMsg.style.color = 'green';
+      statusMsg.textContent = 'Login berhasil!';
+
+      // Jika ingin redirect ke halaman lain, uncomment di bawah ini
+      // window.location.href = 'dashboard.html';
+    } else {
+      statusMsg.style.color = 'orange';
+      statusMsg.textContent = 'Gagal login, silakan coba lagi.';
     }
-  </script>
+  } catch (error) {
+    console.error(error);
+    statusMsg.style.color = 'red';
+    statusMsg.textContent = 'Tidak dapat terhubung ke server. Pastikan API aktif.';
+  }
+});
+</script>
+
 </body>
 </html>
