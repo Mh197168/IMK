@@ -1,14 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Form Registrasi</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  form {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 300px;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  #message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+  }
+</style>
+</head>
+<body>
+
+<form id="registerForm">
+  <h2>Daftar Akun</h2>
+  <input type="text" name="username" placeholder="Username" required />
+  <input type="password" name="password" placeholder="Password" required />
+  <button type="submit">Register</button>
+  <div id="message"></div>
+</form>
+
+<script>
 const form = document.getElementById('registerForm');
 const msg = document.getElementById('message');
 
 form.addEventListener('submit', async (e) => {
-  e.preventDefault(); // cegah form submit default
+  e.preventDefault(); // cegah submit default form
 
   // Tampilkan pesan memproses
   msg.style.color = 'black';
+  msg.style.fontWeight = 'bold';
+  msg.style.fontSize = '16px';
   msg.textContent = 'Memproses...';
 
-  // Ambil data dari form (misalnya username dan password)
+  // Ambil data dari form
   const formData = new FormData(form);
   const data = {};
   formData.forEach((value, key) => {
@@ -29,18 +108,22 @@ form.addEventListener('submit', async (e) => {
 
     if (response.ok) {
       // Jika berhasil
-      msg.style.color = 'green';
+      msg.style.color = 'blue'; // Warna biru untuk sukses
       msg.textContent = 'Registrasi berhasil!';
-      // Uncomment baris berikut jika ingin redirect ke halaman konfirmasi
+      // Jika ingin redirect ke halaman konfirmasi, hapus komentar berikut
       // window.location.href = "confirm.html";
     } else {
       // Jika gagal
-      msg.style.color = 'red';
+      msg.style.color = 'orange'; // Warna oranye untuk gagal
       msg.textContent = result.error || 'Registrasi gagal!';
     }
   } catch (error) {
     // Jika koneksi ke server gagal
-    msg.style.color = 'red';
+    msg.style.color = 'red'; // Warna merah untuk error
     msg.textContent = 'Terjadi kesalahan. Coba lagi nanti.';
   }
 });
+</script>
+
+</body>
+</html>
