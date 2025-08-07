@@ -19,7 +19,7 @@
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    width: 300px;
+    width: 350px;
   }
 
   h2 {
@@ -95,8 +95,8 @@ form.addEventListener('submit', async (e) => {
   });
 
   try {
-    // Ganti URL sesuai endpoint API registrasi Anda
-    const response = await fetch('https://api.situsanda.com/register', { // <-- Ganti URL ini
+    // Ganti URL sesuai endpoint API Anda
+    const response = await fetch('https://api.situsanda.com/register', { // <-- Ganti URL ini sesuai API Anda
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -108,18 +108,18 @@ form.addEventListener('submit', async (e) => {
 
     if (response.ok) {
       // Jika berhasil
-      msg.style.color = 'blue'; // Warna biru untuk sukses
+      msg.style.color = 'blue';
       msg.textContent = 'Registrasi berhasil!';
       // Jika ingin redirect ke halaman konfirmasi, hapus komentar berikut
       // window.location.href = "confirm.html";
     } else {
       // Jika gagal
-      msg.style.color = 'orange'; // Warna oranye untuk gagal
+      msg.style.color = 'orange';
       msg.textContent = result.error || 'Registrasi gagal!';
     }
   } catch (error) {
     // Jika koneksi ke server gagal
-    msg.style.color = 'red'; // Warna merah untuk error
+    msg.style.color = 'red';
     msg.textContent = 'Terjadi kesalahan. Coba lagi nanti.';
   }
 });
